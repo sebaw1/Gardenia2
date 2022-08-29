@@ -66,31 +66,30 @@ GPIO.setup(15, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #==konfiguracja bazy Firebase==
 config = {
-    "apiKey": "AIzaSyDug-369OSKS-SwxgCNMPN5As4efA8Ojps",
-    "authDomain": "gardening-raspberry.firebaseapp.com",
-    "databaseURL": "https://gardening-raspberry-default-rtdb.europe-west1.firebasedatabase.app/",
-    "storageBucket": "gardening-raspberry.appspot.com"
+    "apiKey": "YOUR API HERE",
+    "authDomain": "YOUR API HERE",
+    "databaseURL": "YOUR API HERE",
+    "storageBucket": "YOUR API HERE"
 }
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 #==============================
 
 #============FIREBASE CLOUD MESSAGE NOTIFICATION ======
-push_service = FCMNotification(api_key="AAAAy1STM3U:APA91bED2ml53zs7sq675vjWVK9uT9gU0hz6WhlVNKWfRd0oFH99gUVhr8RiioTBFa89w7GY08vbZHp4c35oSOOESxsw2VjmSh1n1TfOXV1QaIVOLt__JmxEG7B8Lc3hauZm6JW9n47b")
+push_service = FCMNotification(api_key="YOUR API KEY HERE")
 #======================================================
 
 #==========OPEN WEATHER API====================
 openWeatherMapRequest = 'http://api.openweathermap.org/data/2.5/forecast'
 paramsOW = dict(
-    q='Mogilno,PL',
+    q='YOUR CITY HERE',
     lang='pl',
     units='metric',
     cnt='5',
-    appid='be577fa95eac00feb3da8f986048e25b'
+    appid='YOUR APID HERE'
 )
 
 #==============================================
-
 
 
 def readADC(pin):
@@ -262,9 +261,6 @@ def updatePiInfo():
     }
     db.update(data_to_update)
     
-
-    
-    
     printlog(datetime.datetime.now().strftime(dateString))
     printlog("Wilgotnosc: Aktualna["+humidity+"], Max["+maxHumidity+"], Min["+minHumidity+"]")
     printlog("Temperatura: Aktualna["+temperature+"], Max["+maxTemperature+"], Min["+minTemperature+"]")
@@ -273,10 +269,6 @@ def updatePiInfo():
     printlog("DISK total["+str(DISK_total)+"], free["+str(DISK_free)+"], perc["+str(DISK_perc)+"]")
     printlog("## Aktualizacja przebiegla pomyslnie ##")
     printlog("======================================================\n")
-
-
-
-
 
 
 #switch_number_key = 'switch_number'
@@ -351,37 +343,14 @@ update_request = db.child("/Settings/tokenMessaging").stream(tokenMsg_handler)
 
 
 def pushNotification(title, body):
-#    extra_notification_kwargs = {
-    #    'priority': 'high',
-    #    'android': {
-    #        'priority': 'high'
-        #}
-
-#        'android': {
-#            'priority': 'high'
-#         },
-#        'priority': 10,
-#        'image': 'https://w7.pngwing.com/pngs/858/375/png-transparent-warning-sign-safety-hazard-symbol-exclamation-mark-angle-triangle-sign.png'
-#    }
-
-    #extra_kwargs = {'priority': 'high'}
 
     data_messagee= {
             'priority' : 'high',
             'sound' : 'default',
             'tag': 'example',
-            #'icon' : 'icon',
             'title' : title,
             'body' : body
     }
-
-#    data_messagee = {
-#        "Nick" : "Mario",
-#        "body" : "great match!",
-#        "Room" : "PortugalVSDenmark"
-#    }
-
-    #push_service.notify_single_device(registration_id=registrationId, message_title=title, message_body=body)
 
     push_service.notify_single_device(registration_id=registrationId, data_message=data_messagee)
     printlog("Wyslany PushNotification: " + title + " " + body)
@@ -405,23 +374,6 @@ current_activity = db.child("/CurrentActivity").stream(current_activity_handler)
 #=======================================================
 
 
-#===========wysylanie danych do firebase po wykryciu zbocza=====TEST
-#def my_callback(channel):  
-#    if GPIO.input(15):
-#        db.child("/Controls/Blinds/Livingroom").update({"value":1})
-#        printlog("Rising edge detected on 25")
-#    else:
-#        printlog("Falling edge detected on 25")
-#        db.child("/Controls/Blinds/Livingroom").update({"value":0})
-#
-#GPIO.add_event_detect(15, GPIO.BOTH, callback=my_callback, bouncetime=1000)
-#==============================================================
-
-
-#def regulator_2_polozeniowy(zad_temperatura):
-    #regulator 2 polozeniowy, kod z PLC
-#    print("Zmiana ustawien temp: " + zad_temperatura)
-
 def wateringTimeRelay(strTime):
     splittedTime = strTime.split("-")
     wateringStart = splittedTime[0].split(":")
@@ -440,30 +392,6 @@ def wateringTimeRelay(strTime):
 
     printlog("Nowe godziny nawadniania: " + startWateringHour+":"+ startWateringMinute+"-->"+endWateringHour+":"+endWateringMinute)
     
-
-#def toggleControlChild(name, pin_number, control_type, channel):
-    # First switch on/off the light in relation of the gpio state
-#    GPIO.setup(pin_number, GPIO.OUT)
- #   value = GPIO.input(pin_number)
- #   newValue = int(not value)
- #   GPIO.output(pin_number, newValue)
-
-    # Then update db with the new state
- #   db.put("/Controls/"+control_type+"/"+name, "/value", newValue)
-
-
-
-# Fetch db switch data
-#controls = db.get('/Controls', None)
-
-#for cat_name, cat_value in controls.items():
-#    for control_name, control_value in cat_value.items():
-#        if control_value.get(switch_number_key) != None or control_value.get(switch_number_key) is not None:
-            # Set up IN gpio pin for switch
-#            switch_number = control_value.get(switch_number_key)
-
-
-
 def tempLoop():
     while True:
         try:
@@ -501,15 +429,13 @@ def tempLoop():
                     GPIO.output(RELAY_HEATER, 1) #off relay        
                     GPIO.output(RELAY_FAN, 1) #off relay                
 
-            time.sleep(30)#60sec
+            time.sleep(30)
 
         except KeyboardInterrupt:
             pwm.stop()
             sys.exit(0)
 
 def timeLoop():
-    #GPIO.setmode(GPIO.BOARD)
-    #GPIO.setup(RELAY_WATER_PUMP, GPIO.OUT)
 
     while True:
         try:
@@ -559,10 +485,6 @@ def mainLoop():
             pwm.stop()
             sys.exit(0)
 
-
-    #    finally:
-        #    print("clean up") 
-        #    GPIO.cleanup() # cleanup all GPIO
 
 
 thread1 = threading.Thread(target=mainLoop)
