@@ -1,0 +1,41 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Ustawienia Firebase">
+
+    </PreferenceCategory>
+    <EditTextPreference
+
+        android:defaultValue="400"
+        android:key="edit_text_preference_1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Ilość sekund, po której następuje automatyczne wysyłanie danych z Raspberry do bazy"
+        android:title="Czas aktualizacji Firebase [sek]" />
+    <PreferenceCategory android:title="Ustawienia kamery">
+
+    </PreferenceCategory>
+    <EditTextPreference
+        android:defaultValue="193.8.182.219"
+        android:key="edit_text_zewn_ip"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Zewnętrzne IP kamery" />
+    <EditTextPreference
+        android:defaultValue="192.168.0.64"
+        android:key="edit_text_wewn_ip"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Wewnętrzne IP kamery" />
+    <EditTextPreference
+        android:defaultValue="admin"
+        android:key="edit_text_login_cam"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Login" />
+    <EditTextPreference
+        android:defaultValue="mogilno1"
+        android:key="edit_text_pass_cam"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Hasło" />
+
+</PreferenceScreen>

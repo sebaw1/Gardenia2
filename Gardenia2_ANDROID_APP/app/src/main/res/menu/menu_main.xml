@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.gardenia.domain.gardenia2.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/raspberry_settings"
+        android:orderInCategory="101"
+        android:title="@string/about_raspberry" />
+    <item
+        android:id="@+id/about_settings"
+        android:orderInCategory="102"
+        android:title="@string/about_settings" />
+</menu>
